@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Kacperowy blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Mój Blog</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div>
-            {% for post in posts %}
-                <div>
-                    <p>published: {{ post.published_date }}</p>
-                    <h2><a href="">{{ post.title }}</a></h2>
-                    <p>{{ post.text|linebreaksbr }}</p>
-                </div>
-            {% endfor %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                <p>published: {{ post.published_date }}</p>
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <p>published: 04.07.2023, 12:14</p>
-            <h2><a href="">Drugi post</a></h2>
-            <p>To samo dotyczy drugiego posta. Jakieś bzdety oderwane od rzeczywistości.</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
